@@ -11,6 +11,7 @@ extensions.configure(CargoExtension::class) {
     module = "src/main/rust"
     libname = "rust"
     targets = listOf("x86_64")
+    profile = "release"
 }
 
 tasks.preBuild.configure {
@@ -29,6 +30,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            isShrinkResources = false
+            isMinifyEnabled = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
