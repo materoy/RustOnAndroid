@@ -18,7 +18,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val fromCpp = NativeLib().stringFromJNI()
-        val fromRust = RustLib().stringFromJNI()
+        val rustLib = RustLib()
+        val fromRust = rustLib.stringFromJNI()
+        val fromRustWithParam = rustLib.inputFun("Kotlin")
         enableEdgeToEdge()
         setContent {
             RustOnAndroidTheme {
@@ -26,6 +28,7 @@ class MainActivity : ComponentActivity() {
                     Column(Modifier.padding(innerPadding)) {
                         Text(text = fromCpp)
                         Text(text = fromRust)
+                        Text(text = fromRustWithParam)
                     }
                 }
             }
