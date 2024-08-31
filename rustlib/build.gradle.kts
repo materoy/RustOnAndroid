@@ -30,10 +30,6 @@ android {
     }
 
     buildTypes {
-        debug {
-            isShrinkResources = false
-            isMinifyEnabled = true
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(

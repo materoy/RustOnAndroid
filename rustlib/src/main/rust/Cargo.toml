@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-ijni = "0.21.1"
+jni = "0.21.1"
 
 [lib]
-crate_type = ["staticlib", "dylib"]
+crate-type = ["staticlib", "dylib"]
