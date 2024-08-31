@@ -14,8 +14,17 @@ extensions.configure(CargoExtension::class) {
     profile = "release"
 }
 
-tasks.preBuild.configure {
-    dependsOn(tasks.withType(CargoBuildTask::class.java))
+project.afterEvaluate {
+    tasks.withType(CargoBuildTask::class)
+        .forEach { buildTask ->
+            tasks.withType(com.android.build.gradle.tasks.MergeSourceSetFolders::class)
+                .configureEach {
+                    this.inputs.dir(
+                        layout.buildDirectory.dir("rustJniLibs" + File.separatorChar + buildTask.toolchain!!.folder)
+                    )
+                    this.dependsOn(buildTask)
+                }
+        }
 }
 
 android {
